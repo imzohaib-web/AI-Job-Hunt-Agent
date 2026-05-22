@@ -79,8 +79,17 @@ def node_parse_profile(state: AgentState) -> AgentState:
             f"{len(profile.get('experience',[]))} jobs"
         )
     except Exception as e:
-        state["error"] = f"Profile parsing failed: {e}"
-        state["status_log"].append(f"❌ Profile parsing error: {e}")
+        from core.llm_client import LLMConfigurationError, _unwrap_retry_error, _friendly_error
+
+        inner = _unwrap_retry_error(e)
+        if isinstance(inner, LLMConfigurationError) or isinstance(e, ValueError):
+            msg = str(inner if isinstance(inner, LLMConfigurationError) else e)
+        elif "RetryError" in type(e).__name__ or "Authentication" in type(inner).__name__:
+            msg = _friendly_error(inner)
+        else:
+            msg = str(inner)
+        state["error"] = f"Profile parsing failed: {msg}"
+        state["status_log"].append(f"❌ Profile parsing error: {msg}")
         logger.error("parse_profile node error: %s", e)
 
     return state

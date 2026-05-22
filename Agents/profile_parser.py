@@ -75,11 +75,29 @@ def extract_resume_text(file_path: str) -> str:
 
 
 def parse_profile_with_llm(raw_text: str) -> Dict:
-    from core.llm_client import call_llm_json
+    from core.llm_client import call_llm_json, LLMConfigurationError
 
     trimmed = raw_text[:8000]
     prompt = PROFILE_PROMPT.format(raw_text=trimmed)
-    result = call_llm_json(prompt, system=PROFILE_SYSTEM)
+    try:
+        # provider=None → auto chain: Groq then Gemini (GEMINI_API_KEY supported)
+        result = call_llm_json(prompt, system=PROFILE_SYSTEM, provider=None)
+    except LLMConfigurationError as e:
+        raise ValueError(str(e)) from e
+    except Exception as e:
+        from core.llm_client import _unwrap_retry_error
+
+        inner = _unwrap_retry_error(e)
+        is_auth = (
+            "authentication" in type(inner).__name__.lower()
+            or "401" in str(inner).lower()
+        )
+        if is_auth:
+            raise ValueError(
+                "LLM authentication failed. Ensure GEMINI_API_KEY or GROQ_API_KEY "
+                "is valid in .env (Groq keys start with gsk_)."
+            ) from inner
+        raise
 
     if "error" in result:
         logger.warning("LLM profile parse failed, using minimal profile.")

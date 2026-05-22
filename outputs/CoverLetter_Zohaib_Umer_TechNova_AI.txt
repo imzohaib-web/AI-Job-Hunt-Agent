@@ -1,0 +1,12 @@
+Dear Hiring Manager at TechNova AI,
+
+I am excited to apply for the AI Engineer position at TechNova AI, where I can leverage my skills in React, JavaScript, and HTML5 to contribute to the development of innovative AI solutions. As a motivated Front-End Web Developer and BS Software Engineering student at COMSATS University, I am confident that my passion for building responsive and user-friendly web applications aligns with the company's mission to help people find their dream job.
+
+With hands-on experience in building responsive UI components using HTML5, CSS3, JavaScript, and React, I am well-equipped to build ML pipelines and APIs that meet the company's requirements. My experience as a Front-End Developer Intern at Erudite Coaching Center has provided me with a solid foundation in integrating REST APIs and LLM API Integration using OpenAI and Anthropic. I am eager to collaborate with cross-functional teams and contribute my skills to deliver large-scale AI projects that make a meaningful impact.
+
+I am particularly drawn to TechNova AI's collaborative and diverse work environment, which I believe will enable me to grow both personally and professionally. The opportunity to work on large-scale AI projects and be part of a team that is dedicated to helping people find their dream job resonates deeply with me. Although the job description mentions experience with Python and cloud as a plus, I am excited to learn and expand my skill set to meet the company's needs.
+
+Thank you for considering my application. I am excited about the opportunity to discuss my qualifications further and learn more about the AI Engineer role at TechNova AI. I am confident that my skills, experience, and passion for AI engineering make me a strong fit for this position, and I look forward to the opportunity to contribute to the company's mission. 
+
+Sincerely,
+Zohaib Umer

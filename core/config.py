@@ -31,15 +31,24 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 DB_PATH = DATA_DIR / "job_agent.db"
 
 # ── API Keys (all free tiers) ────────────────────────────────────────────────
-GROQ_API_KEY       = os.getenv("GROQ_API_KEY", "")
-GOOGLE_API_KEY     = os.getenv("GOOGLE_API_KEY", "")
+GROQ_API_KEY       = os.getenv("GROQ_API_KEY", "").strip()
+# Accept GOOGLE_API_KEY or GEMINI_API_KEY (common .env naming)
+GOOGLE_API_KEY     = (
+    os.getenv("GOOGLE_API_KEY", "").strip()
+    or os.getenv("GEMINI_API_KEY", "").strip()
+)
 PINECONE_API_KEY   = os.getenv("PINECONE_API_KEY", "")
 PINECONE_INDEX     = os.getenv("PINECONE_INDEX_NAME", "job-embeddings")
 SERPER_API_KEY     = os.getenv("SERPER_API_KEY", "")
 
 # ── Model Config ─────────────────────────────────────────────────────────────
 EMBED_MODEL        = os.getenv("EMBED_MODEL", "all-MiniLM-L6-v2")   # local, free
-LLM_MODEL          = os.getenv("LLM_MODEL", "llama-3.1-70b-versatile")
+# Groq model id — see https://console.groq.com/docs/models
+LLM_MODEL          = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
+# gemini-1.5-flash has broader free-tier availability than gemini-2.0-flash
+GEMINI_MODEL       = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+# Force "groq" or "gemini" (empty = auto: groq if GROQ_API_KEY else gemini)
+LLM_PROVIDER       = os.getenv("LLM_PROVIDER", "").strip().lower()
 LLM_TEMPERATURE    = float(os.getenv("LLM_TEMPERATURE", "0.3"))
 MAX_JOBS           = int(os.getenv("MAX_JOBS_PER_SEARCH", "20"))
 MIN_MATCH_SCORE    = float(os.getenv("MIN_MATCH_SCORE", "0.55"))

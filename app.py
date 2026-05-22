@@ -420,3 +420,26 @@ else:
         then tailor your resume, write a cover letter, and generate interview prep.
         """
     )
+
+
+if __name__ == "__main__":
+    import subprocess
+    import sys
+
+    try:
+        import streamlit  # noqa: F401
+    except ModuleNotFoundError:
+        print(
+            "Streamlit is not installed for this Python.\n"
+            "Activate the project venv, then install deps:\n"
+            '  .\\venv\\Scripts\\Activate.ps1\n'
+            "  pip install streamlit python-dotenv\n"
+            "  streamlit run app.py\n"
+        )
+        sys.exit(1)
+
+    print("Starting Streamlit… Open http://localhost:8501 in your browser.")
+    subprocess.run(
+        [sys.executable, "-m", "streamlit", "run", str(Path(__file__).resolve())],
+        check=False,
+    )
