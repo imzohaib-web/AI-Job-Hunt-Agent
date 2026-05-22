@@ -1,0 +1,4 @@
+# AI Job Hunting Agent — pip install -r requirements.txt
+# See requirements,txt for pinned versions; this file is the standard name.
+
+-r requirements,txt

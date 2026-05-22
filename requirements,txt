@@ -1,0 +1,48 @@
+# ============================================================
+# AI Job Hunting Agent - requirements.txt
+# ALL FREE / open-source packages
+# Install: pip install -r requirements.txt
+# ============================================================
+
+# --- LLM & Agent Orchestration ---
+langchain==0.3.7
+langchain-groq==0.2.1          # Free Groq LLM (LLaMA 3)
+langchain-google-genai==2.0.6  # Free Gemini fallback
+langgraph==0.2.45              # Agent state machine
+
+# --- Embeddings (runs locally, zero API cost) ---
+sentence-transformers==3.3.1
+torch==2.5.1                   # Required by sentence-transformers
+
+# --- Vector Database ---
+pinecone-client==5.0.1         # Free tier: 1 index, 100K vectors
+
+# --- Resume / Document Parsing ---
+pdfminer.six==20221105         # Extract text from PDF resumes
+python-docx==1.1.2             # Read/write .docx files
+PyPDF2==3.0.1                  # Alternative PDF reader
+
+# --- Web Scraping & Browser Automation ---
+playwright==1.49.0             # Free browser automation
+beautifulsoup4==4.12.3         # HTML parsing
+requests==2.32.3               # HTTP calls
+httpx==0.28.1                  # Async HTTP
+
+# --- Backend API ---
+fastapi==0.115.5
+uvicorn==0.32.1
+python-multipart==0.0.12       # File upload support
+
+# --- Frontend UI ---
+streamlit==1.40.2
+
+# --- Database (built-in Python, zero setup) ---
+# sqlite3 is part of Python stdlib - no install needed
+
+# --- Utilities ---
+python-dotenv==1.0.1           # Load .env API keys
+pydantic==2.10.3               # Data validation
+tenacity==9.0.0                # Retry logic for API calls
+loguru==0.7.2                  # Better logging
+pandas==2.2.3                  # Data manipulation
+tqdm==4.67.1                   # Progress bars
