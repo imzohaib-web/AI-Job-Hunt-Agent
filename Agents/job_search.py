@@ -119,5 +119,10 @@ def run_job_search(
         logger.warning("Serper returned no jobs — using demo dataset.")
         jobs = _demo_jobs(job_titles, locations, skills, max_jobs)
     jobs = save_jobs_to_db(jobs)
+    try:
+        from Agents.analytics import record_search_run
+        record_search_run(job_titles, locations, len(jobs))
+    except Exception as e:
+        logger.warning("Could not record search run: %s", e)
     logger.info("=== Job Search Agent DONE — %d jobs ===", len(jobs))
     return jobs

@@ -422,6 +422,13 @@ def run_full_pipeline(
     # Run pipeline
     final_state = app.invoke(initial_state)
 
+    # Persist application for analytics dashboard
+    try:
+        from Agents.analytics import record_application_from_pipeline
+        record_application_from_pipeline(final_state)
+    except Exception as e:
+        logger.warning("Could not save application for analytics: %s", e)
+
     logger.info("=" * 60)
     logger.info("PIPELINE COMPLETE")
     for log_line in final_state.get("status_log", []):
